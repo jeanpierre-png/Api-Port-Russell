@@ -6,4 +6,6 @@ app.use(express.json());
 app.use('/auth', require('./routes/auth.routes'));
 app.use('/catways', require('./routes/catway.routes'));
 
+app.use('/reservations', require('./routes/reservation.routes'));
+
 module.exports = app;
