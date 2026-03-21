@@ -21,7 +21,8 @@ exports.login = async (req, res) => {
         { expiresIn: '1h'}
     );
 
-    res.json({ token });
+    res.redirect('/dashboard');
+
 };
 
 exports.register = async (req, res) => {
@@ -40,5 +41,7 @@ exports.register = async (req, res) => {
         password: hashedPassword
     });
 
-    res.status(201).json({ message: 'Utilisateur créé', user: newUser })
+    res.redirect('/dashboard');
+    res.status(201).json({ message: 'Utilisateur créé', user: newUser });
+    
 };

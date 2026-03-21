@@ -2,7 +2,9 @@ const reservationService = require('../services/reservation.service.js');
 
 exports.getAll = async (req, res) => {
     const reservations = await reservationService.getAll();
-    res.json(reservations);
+    res.render("reservations", {
+        reservations: reservations
+    });
 };
 
 exports.getOne = async (req, res) => {
@@ -12,12 +14,14 @@ exports.getOne = async (req, res) => {
         return res.status(404).json({ message: "Réservation non trouvée" });
     }
 
-    res.json(reservation);
+    res.render("reservation", {
+        reservation: reservation
+    });
 };
 
 exports.create = async (req, res) => {
-    const newReservation = await reservationService.create(req.body);
-    res.status(201).json(newReservation);
+    await reservationService.create(req.body);
+    res.redirect('/dashboard');
 };
 
 exports.update = async (req, res) => {
