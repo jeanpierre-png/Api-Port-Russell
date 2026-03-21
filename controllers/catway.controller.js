@@ -1,9 +1,10 @@
-const { json } = require('express');
 const catwayService = require('../services/catway.service');
 
 exports.getAll = async (req, res) => {
     const catways = await catwayService.getAll();
-    res.json(catways);
+    res.render("catways", {
+        catways: catways
+    });
 };
 
 exports.getOne = async (req, res) => {
@@ -11,12 +12,14 @@ exports.getOne = async (req, res) => {
     if (!catway) {
         return res.status(404).json({ message: "Catway non trouvé" });
     }
-    res.json(catway);
+    res.render("catway", {
+        catway: catway
+    });
 };
 
 exports.create = async (req, res) => {
-    const newCatway = await catwayService.create(req.body);
-    res.status(201).json(newCatway);
+    await catwayService.create(req.body);
+    res.redirect('/dashboard');
 };
 
 exports.update = async (req, res) => {
@@ -33,4 +36,5 @@ exports.delete = async (req, res) => {
         return res.status(404).json({ message: "Catway non trouvé" });
     }
     res.json({ message: "Catway supprimé" });
+    
 };

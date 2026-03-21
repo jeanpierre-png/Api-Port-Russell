@@ -1,0 +1,148 @@
+<h1>Tableau de bord</h1>
+
+<h2>Créer un utilisateur</h2>
+
+<form action="/auth/register" method="POST">
+    <input name="name" placeholder="Nom">
+    <input name="email" placeholder="E-mail">
+    <input name="password" placeholder="Mot de passe">
+
+    <button type="submit">Créer utilisateur</button>
+</form>
+
+<hr>
+
+<h2>Modifier un utilisateur</h2>
+
+<form action="/users/update"method="POST">
+
+    <select name="id" required>
+        <% users.forEach(user => { %>
+
+            <option value="<%= user._id%>">
+                <%= user.email %> 
+            </option>
+        <% }) %>
+    </select>
+
+    <input type="text" name="name" placeholder="Nouveau nom"  required>
+    <input type="email" name="email" placeholder="Nouveau email" required>
+
+    <button type="submit">Modifier</button>
+</form>
+
+<hr>
+
+<h2>Supprimer un utilisateur</h2>
+
+<form action="/users/delete" method="POST">
+
+    <select name="id" required>
+        <% users.forEach(user => { %>
+
+            <option value="<%= user._id%>">
+                <%= user.email %> 
+            </option>
+        <% }) %>
+    </select>
+
+    <button type="submit">Supprimer</button>
+</form>
+
+<hr>
+
+<h2>Créer un Catways</h2>
+
+<form action="/catways" method="POST">
+
+    <input type="number" name="catwayNumber" placeholder="Numéro">
+
+    <select name="catwayType">
+        <option value="short">court</option>
+        <option value="long">long</option>
+    </select>
+
+    <input type="text" name="catwayState" placeholder="État">
+
+    <button type="submit">Créer catway</button>
+</form>
+
+<hr>
+
+<h2>Modifier état d'un catway</h2>
+
+<form action="/catways/update" method="POST">
+
+    <select name="id" required>
+        <% catways.forEach(catway => { %>
+
+            <option value="<%= catway._id%>">
+               Catway <%= catway.catwayNumber %> - <%= catway.catwayState %>
+            </option>
+        <% }) %>
+    </select>
+    
+    <input type="text" name="catwayState" placeholder="Nouvel état" required>
+
+    <button type="submit">Modifier</button>
+</form>
+
+<hr>
+
+<h2>Supprimer un catway</h2>
+
+<form action="/catways/delete" method="POST">
+    <select name="id" required>
+        <% catways.forEach(catway => { %>
+
+            <option value="<%= catway._id%>">
+                Catway <%= catway.catwayNumber %>
+            </option>
+        <% }) %>
+    </select>
+
+    <button type="submit">Supprimer</button>
+</form>
+
+<hr>
+
+<h2>Créer une réservation</h2>
+
+<form action="/reservations" method="POST">
+    <input type="number" name="catwayNumber" placeholder="Catway">
+    <input type="text" name="clientName" placeholder="Client">
+    <input type="text" name="boatName" placeholder="Bateau">
+    <input type="date" name="startDate">
+    <input type="date" name="endDate">
+
+    <button type="submit">Créer réservation</button>
+</form>
+
+<hr>
+
+<h2>Supprimer une réservation</h2>
+
+<form action="/reservations/delete" method="POST">
+
+    <select name="id" required>
+        <% reservations.forEach(reservation => { %>
+
+            <option value="<%= reservation._id%>">
+                Réservation <%= reservation.catwayNumber %>
+            </option>
+        <% }) %>
+    </select>
+
+    <button type="submit">Supprimer</button>
+</form>
+
+<h2>Navigation</h2>
+
+<a href="/catways">Voir les catways</a>
+
+<br><br>
+
+<a href="/reservations">Voir les réservations</a>
+
+
+

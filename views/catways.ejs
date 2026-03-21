@@ -1,0 +1,16 @@
+<h1>Liste des Catways</h1>
+
+<ul>
+    <% catways.forEach(catway => { %>
+
+        <li>
+            <a href="/catways/<%= catway._id%>">
+                Catway <%= catway.catwayNumber %>
+            </a>
+        </li>
+
+    <% }) %>
+
+</ul>
+
+<a href="/dashboard">Retour tableau de bord</a>

@@ -1,0 +1,16 @@
+<h1>Liste des réservations</h1>
+
+<ul>
+    <% reservations.forEach(reservation => { %>
+
+        <li>
+            <a href="/reservations/<%= reservation._id%>">
+                Réservation <%= reservation.clientName %>
+            </a>
+        </li>
+
+    <% }) %>
+
+</ul>
+
+<a href="/dashboard">Retour tableau de bord</a>
