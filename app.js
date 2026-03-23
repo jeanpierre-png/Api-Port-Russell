@@ -1,13 +1,16 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const swaggerUi = require('swagger-ui-express');
 
 const Catway = require('./models/Catway');
 const Reservation = require('./models/Reservation');
 const User = require('./models/User');
+const swaggerSpec = require('./docs/swagger')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
