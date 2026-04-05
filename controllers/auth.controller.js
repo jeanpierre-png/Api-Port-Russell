@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken')
-const userService = require('../services/user.service')
+const jwt = require('jsonwebtoken');
+const userService = require('../services/user.service');
 
 exports.login = async (req, res) => {
     const { email, password} = req.body;
@@ -17,11 +17,17 @@ exports.login = async (req, res) => {
 
     const token = jwt.sign(
         { userId: user._id},
-        process.env.JWT_SECRET,
+        process.env.JWT_SECRET || 'SECRET_KEY',
         { expiresIn: '1h'}
     );
 
-    res.redirect('/dashboard');
+    res.cookie('token', token);
+
+    if (req.headers['x-test']) {
+        return res.json({ token }); // pour les tests
+    } else {
+        return res.redirect('/dashboard'); // pour le navigateur
+    }
 
 };
 
@@ -41,7 +47,6 @@ exports.register = async (req, res) => {
         password: hashedPassword
     });
 
-    res.redirect('/dashboard');
     res.status(201).json({ message: 'Utilisateur créé', user: newUser });
     
 };
