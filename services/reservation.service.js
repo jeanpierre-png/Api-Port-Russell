@@ -12,7 +12,7 @@ exports.create = (data) => {
     return Reservation.create(data);
 };
 
-exports.update = (data) => {
+exports.update = (id, data) => {
     return Reservation.findByIdAndUpdate(id, data, { new: true });
 };
 

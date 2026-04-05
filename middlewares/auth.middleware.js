@@ -1,19 +1,20 @@
 const jwt = require('jsonwebtoken');
-
+const cookieParser = require('cookie-parser');
 
 module.exports = (req, res, next) => {
-    const authHeader = req.headers.authorization; 
+
+    const authHeader = req.cookies.token; 
 
     if (!authHeader) {
         return res.status(401).json({ message: 'Token manquant' });
     }
 
-    const token = authHeader.split(' ')[1];
+    const token = authHeader;
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.userId = decoded.userId;
+        const decoded = jwt.verify(token, process.env.JWT_SECRET || 'SECRET_KEY');
         next();
+    
     } catch (error) {
         res.status(401).json({ message: 'Token invalide' });
     }

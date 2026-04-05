@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('../models/User');
 const authMiddleware = require('../middlewares/auth.middleware');
 
-router.post('/update', async (req, res) => {
+router.post('/update', authMiddleware, async (req, res) => {
     await User.findByIdAndUpdate(req.body.id, {
         name: req.body.name,
         email: req.body.email
@@ -12,7 +12,7 @@ router.post('/update', async (req, res) => {
     res.redirect('/dashboard');
 });
 
-router.post('/delete',  async (req, res) => {
+router.post('/delete', authMiddleware,  async (req, res) => {
     await User.findByIdAndDelete(req.body.id);
 
     res.redirect('/dashboard');
