@@ -10,7 +10,6 @@ const Reservation = require('./models/Reservation');
 const User = require('./models/User');
 const swaggerSpec = require('./docs/swagger');
 
-app.use(bodyParser.json());
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
@@ -24,8 +23,12 @@ app.use('/catways', require('./routes/catway.routes'));
 app.use('/reservations', require('./routes/reservation.routes'));
 app.use('/users', require('./routes/user.routes'));
 
-app.get('/', (req, res) => {
+///app.get('/', (req, res) => {
     res.render('index');
+///});
+
+app.get('/', (req, res) => {
+    res.send('API fonctionne ');
 });
 
 app.get('/dashboard', async (req, res) => {
