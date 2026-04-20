@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const bodyParser = require("body-parser");
 const app = express();
 const swaggerUi = require('swagger-ui-express');
 const cookieParser = require('cookie-parser');
@@ -27,11 +26,7 @@ app.use('/users', require('./routes/user.routes'));
     ///res.render('index');
 ///});
 
-app.get('/', (req, res) => {
-    res.send('API fonctionne ');
-});
-
-app.get('/dashboard', async (req, res) => {
+app.get('/', async (req, res) => {
 
     const catways = await Catway.find();
     const reservations = await Reservation.find();
