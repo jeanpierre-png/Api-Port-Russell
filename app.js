@@ -22,9 +22,9 @@ app.use('/catways', require('./routes/catway.routes'));
 app.use('/reservations', require('./routes/reservation.routes'));
 app.use('/users', require('./routes/user.routes'));
 
-///app.get('/', (req, res) => {
-    ///res.render('index');
-///});
+app.get('/', (req, res) => {
+    res.render('index');
+});
 
 app.get('/', async (req, res) => {
 
