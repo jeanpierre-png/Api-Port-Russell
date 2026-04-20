@@ -21,7 +21,11 @@ exports.login = async (req, res) => {
         { expiresIn: '1h'}
     );
 
-    res.cookie('token', token);
+    res.cookie('token', token, { 
+        httpOnly: true,
+        secure: true,
+        sameSite: 'None'
+    });
 
     if (req.headers['x-test']) {
         return res.json({ token }); // pour les tests
