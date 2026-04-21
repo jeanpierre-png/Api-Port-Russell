@@ -1,6 +1,9 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+
+app.set('trust proxy', 1);
+
 const swaggerUi = require('swagger-ui-express');
 const cookieParser = require('cookie-parser');
 
