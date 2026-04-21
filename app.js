@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-app.get('/', async (req, res) => {
+app.get('/dashboard', async (req, res) => {
 
     const catways = await Catway.find();
     const reservations = await Reservation.find();
