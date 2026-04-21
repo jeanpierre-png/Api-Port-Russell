@@ -52,6 +52,6 @@ exports.register = async (req, res) => {
         password: hashedPassword
     });
 
-    res.status(201).json({ message: 'Utilisateur créé', user: newUser });
+    res.redirect('/?success=1');
     
 };

@@ -33,6 +33,16 @@
 
     <a href="/api-docs" target="_blank">Documentation API</a>
 
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+
+        if (params.get('success')) {
+            alert("Utilisateur créé avec succès !");
+            window.history.replaceState({}, document.title, "/");
+        }
+    </script>
+
 </body>
 
 </html>
