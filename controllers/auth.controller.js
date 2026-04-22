@@ -18,14 +18,13 @@ exports.login = async (req, res) => {
     const token = jwt.sign(
         { userId: user._id},
         process.env.JWT_SECRET || 'SECRET_KEY',
-        { expiresIn: '1h'}
+        { expiresIn: '9d'}
     );
 
     res.cookie('token', token, { 
         httpOnly: true,
-        secure: true,
-        sameSite: 'None',
-        path: '/'
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
     });
 
     if (req.headers['x-test']) {
