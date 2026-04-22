@@ -1,7 +1,9 @@
 const express = require('express');
 const path = require('path');
-const bodyParser = require("body-parser");
 const app = express();
+
+app.set('trust proxy', 1);
+
 const swaggerUi = require('swagger-ui-express');
 const cookieParser = require('cookie-parser');
 
@@ -10,7 +12,6 @@ const Reservation = require('./models/Reservation');
 const User = require('./models/User');
 const swaggerSpec = require('./docs/swagger');
 
-app.use(bodyParser.json());
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));

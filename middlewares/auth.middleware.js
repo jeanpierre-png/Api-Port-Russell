@@ -1,13 +1,15 @@
 const jwt = require('jsonwebtoken');
-const cookieParser = require('cookie-parser');
 
 module.exports = (req, res, next) => {
+    console.log("Middleware appelé");
 
     const authHeader = req.cookies.token; 
 
     if (!authHeader) {
         return res.status(401).json({ message: 'Token manquant' });
     }
+
+    console.log("Cookies:", req.cookies);
 
     const token = authHeader;
 
@@ -16,6 +18,7 @@ module.exports = (req, res, next) => {
         next();
     
     } catch (error) {
+        console.log("Erreur JWT", error.message);
         res.status(401).json({ message: 'Token invalide' });
     }
 };

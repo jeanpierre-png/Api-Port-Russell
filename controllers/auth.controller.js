@@ -18,10 +18,14 @@ exports.login = async (req, res) => {
     const token = jwt.sign(
         { userId: user._id},
         process.env.JWT_SECRET || 'SECRET_KEY',
-        { expiresIn: '1h'}
+        { expiresIn: '9d'}
     );
 
-    res.cookie('token', token);
+    res.cookie('token', token, { 
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+    });
 
     if (req.headers['x-test']) {
         return res.json({ token }); // pour les tests
@@ -47,6 +51,6 @@ exports.register = async (req, res) => {
         password: hashedPassword
     });
 
-    res.status(201).json({ message: 'Utilisateur créé', user: newUser });
+    res.redirect('/?success=1');
     
 };
